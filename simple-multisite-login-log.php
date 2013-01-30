@@ -40,7 +40,7 @@ class SimpleNetworkLoginLog {
 
 	
 	// Save login action
-       // add_action( 'init', array( $this, 'initLoginAction' ) );
+        // add_action( 'init', array( $this, 'initLoginAction' ) );
 	
 	
 	//add_action('network_admin_menu', array( $this, 'addNetworkAdminMenu' ) );
