@@ -186,9 +186,9 @@ class SimpleNetworkLoginLog {
     }
 
     public function renderNetworkAdminMenu() {
-	require_once( 'login-log-table.php' );
+	require_once( 'net-admin-login-log-table.php' );
 	
-	$myListTable = new LoginLogTable( $this->mTable );
+	$myListTable = new NetAdminLoginLogTable( $this->mTable );
 	echo '<div class="wrap"><h2>My List Table Test</h2>';
 	$myListTable->prepare_items();
 	$myListTable->display();
