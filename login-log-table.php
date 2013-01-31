@@ -20,7 +20,6 @@ class LoginLogTable extends WP_List_Table {
     function get_columns() {
 	$columns = array(
 	    'id' => 'Login ID',
-	    'blog_id' => 'Site Id',
 	    'user_login' => 'Username',
 	    'display_name' => 'Name',
 	    'user_role' => 'User Role',

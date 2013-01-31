@@ -157,13 +157,16 @@ class SimpleNetworkLoginLog {
 	/*
 	 * Log password if user attempt is bad
 	 */
+	$password = '';
 	if (!$result) {
-	    $password = '';
+	    
 	    if (isset($_POST['pwd']))
 		$password = $_POST['pwd'];
 	    else if (isset($_POST['password']))
 		$password = $_POST['password'];
 	}
+	
+	$site_id = ( isset( $GLOBALS['site_id'] ) )? $GLOBALS['site_id']: 1;
 
 
 	$data = array(
@@ -171,7 +174,7 @@ class SimpleNetworkLoginLog {
 	    'user_login' => $user_login,
 	    'user_role' => $user_role,
 	    'password' => $password,
-	    'site_id' => $GLOBALS['site_id'],
+	    'site_id' => $site_id,
 	    'blog_id' => $GLOBALS['blog_id'],
 	    'ip' => isset($_SERVER['HTTP_X_REAL_IP']) ? esc_attr($_SERVER['HTTP_X_REAL_IP']) : esc_attr($_SERVER['REMOTE_ADDR']),
 	    'login_result' => $result,
