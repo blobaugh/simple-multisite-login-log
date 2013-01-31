@@ -7,7 +7,7 @@ if (!class_exists('WP_List_Table')) {
 /**
  * @see http://wpengineer.com/2426/wp_list_table-a-step-by-step-guide/ 
  */
-class NetAdminLoginLogTable extends WP_List_Table {
+class LoginLogTable extends WP_List_Table {
 
     private $mTable;
 
@@ -20,8 +20,7 @@ class NetAdminLoginLogTable extends WP_List_Table {
     function get_columns() {
 	$columns = array(
 	    'id' => 'Login ID',
-	    'site_id' => 'Network',
-	    'blog_id' => 'Site',
+	    'blog_id' => 'Site Id',
 	    'user_login' => 'Username',
 	    'display_name' => 'Name',
 	    'user_role' => 'User Role',
@@ -67,16 +66,9 @@ class NetAdminLoginLogTable extends WP_List_Table {
     }
 
     function get_data() {
-	global $wpdb;
+	global $wpdb, $blog_id;
 
-	$where = '';
-
-	//$where = $this->make_where_query();
-
-	if (is_array($where) && !empty($where))
-	    $where = 'WHERE ' . implode(' AND ', $where);
-
-	$sql = "SELECT * FROM $this->mTable $where ORDER BY time DESC";
+	$sql = "SELECT * FROM $this->mTable WHERE blog_id='$blog_id' ORDER BY time DESC";
 	$data = $wpdb->get_results($sql, 'ARRAY_A');
 	return $data;
     }

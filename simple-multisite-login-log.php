@@ -52,7 +52,7 @@ class SimpleNetworkLoginLog {
 
 
 	add_action('network_admin_menu', array($this, 'addNetworkAdminMenu'));
-	//add_action('admin_menu', 'snll_add_admin_menu', 999);
+	add_action('admin_menu', array( $this, 'addAdminMenu' ) );
     }
 
     /**
@@ -195,6 +195,19 @@ class SimpleNetworkLoginLog {
 	echo '</div>';
     }
 
+    public function addAdminMenu() {
+	add_users_page('Login Log', 'Login Log', 'add_users', 'snll_admin_menu', array($this, 'renderAdminMenu'));
+    }
+
+    public function renderAdminMenu() {
+	require_once( 'login-log-table.php' );
+	
+	$myListTable = new LoginLogTable( $this->mTable );
+	echo '<div class="wrap"><h2>My List Table Test</h2>';
+	$myListTable->prepare_items();
+	$myListTable->display();
+	echo '</div>';
+    }
 }
 
 // end class
