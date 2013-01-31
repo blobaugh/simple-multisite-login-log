@@ -3,7 +3,7 @@
 /*
   Plugin Name: Simple Network Login Log
   Version: 0.6
-  Description: Track user logins across your Multisite network. Site owners see logins for their site. Network admins see all logins in their dashboard
+  Description: Track user logins across your Multisite network. Site owners see logins for their site. Network admins see all logins in their dashboard. Compatible with wp-multi-network
   Author: gehidore
   Author URI: http://jordan.beaveris.me
   Plugin URI: https://github.com/gehidore/simple-multisite-login-log
@@ -14,6 +14,12 @@
 
 new SimpleNetworkLoginLog();
 
+/**
+ * @todo For site - display only logins for that site
+ * @todo On a multinetwork - display only logins for that network
+ * @todo If current network admin area is from blog 1 display all logins across all networks
+ *  
+ */
 class SimpleNetworkLoginLog {
 
     /**
@@ -45,7 +51,7 @@ class SimpleNetworkLoginLog {
 	add_action('init', array($this, 'initLoginAction'));
 
 
-	//add_action('network_admin_menu', array( $this, 'addNetworkAdminMenu' ) );
+	add_action('network_admin_menu', array($this, 'addNetworkAdminMenu'));
 	//add_action('admin_menu', 'snll_add_admin_menu', 999);
     }
 
@@ -180,7 +186,13 @@ class SimpleNetworkLoginLog {
     }
 
     public function renderNetworkAdminMenu() {
+	require_once( 'login-log-table.php' );
 	
+	$myListTable = new LoginLogTable( $this->mTable );
+	echo '<div class="wrap"><h2>My List Table Test</h2>';
+	$myListTable->prepare_items();
+	$myListTable->display();
+	echo '</div>';
     }
 
 }
