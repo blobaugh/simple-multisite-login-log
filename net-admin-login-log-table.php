@@ -71,10 +71,8 @@ class NetAdminLoginLogTable extends WP_List_Table {
 
 	$where = '';
 
-	//$where = $this->make_where_query();
-
-	if (is_array($where) && !empty($where))
-	    $where = 'WHERE ' . implode(' AND ', $where);
+	if( isset( $GLOBALS['site_id'] ) && '1' != $GLOBALS['site_id'] )
+	    $where = "site_id='{$GLOBALS['site_id']}'";
 
 	$sql = "SELECT * FROM $this->mTable $where ORDER BY time DESC";
 	$data = $wpdb->get_results($sql, 'ARRAY_A');
